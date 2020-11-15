@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+}
+\usepackage[a4paper,top=2cm,bottom=2.5cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{float}
+\usepackage{forest}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\title{\textbf{\underline{Attendo Design Document}}}
+\author{
+\textbf{Team - 13} \\
+\\ Angad Kambli, 19114041\\ 
+Ayush Gupta \\ 
+Chirag Wadhwa \\ 
+Devanshu Chowdhury \\ 
+Shubham Bansode \\ }
+\date{}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\textbf{Attendo} is developed by us as an app to streamline marking attendance in classroom settings. It is developed using the \textbf{Flutter} framework and it makes use of \textbf{Network Service Discovery} and \textbf{Socket Programming} for the networking part and \textbf{Firebase} for backend. It aims at making the attendance process quick and easy for both the teachers and the students. The following document will give a thorough description of the methods used in the implementation of the app, the tech stack and the thinking behind selecting it and the UML diagrams. The code is hosted on GitHub and can be accessed \href{https://github.com/Attendo-App/Attendo}{here}.
+
+\section{Division of labour}
+While all the team members were involved in the brainstorming for deciding the app's flow and implementation, there was a clear division of labour with regards to the domains a certain person would be responsible for. Following are the contributions of various members :
+\begin{enumerate}
+    \item \textbf{Angad Kambli, 19114041 :} Initialization of project, implementation of socket programming and network service discovery, coding the login and registration screen UI and other UI fixes, maintaining the GitHub repository(reviewing PRs, solving merge conflicts and so on), designing the icon and other minor fixes.
+    \item \textbf{Ayush Gupta, 1911140-- : } Setting up Firebase in the app, setting up authentication logic for the user, writing database queries for read and writes, writing controller functions to clean data recieved from database.
+    \item \textbf{Chirag Wadhwa, 191140-- : } Implementing the flow of taking and marking attendance, implementing the logic to prevent multiple attendance markings from the same device, Final changes to bring all the implementation together and to remove all hard coded values.
+    \item \textbf{Devanshu Chowdhury, 191140-- : } Designing the login and registration screens, coding and designing the UI for rest of the screens.
+    \item \textbf{Shubham Bansode, 191140-- : }  Writing database queries for read and writes, writing controller functions to clean data recieved from database.
+    
+\end{enumerate}
+
+\section{Use Case Diagram}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{UseCaseDiagram.png}
+    \caption{Use Case Diagram}
+    \label{fig:UseCase}
+\end{figure}
+
+\section{Class Diagram}
+Class diagram will go here. kal banayenge
+
+\section{Sequence Diagram} 
+Sequence diagram will go here. kal banayenge
+
+\section{Tech stack}
+The different frameworks, technologies and libraries used for the implementation will be discussed in the following subsections.
+\subsection{Flutter}
+Flutter is a framework developed by Google mainly for increasing the productivity of Mobile development workflow but has also been extended for web app development. Here, we had the choice of either going with Flutter or going the route of native Android development. Th motivation behind selecting Flutter was some of the added benefits that Flutter gives which includes but are not limited to :
+\begin{itemize}
+    \item Flutter can build for both iOS and Android with very less extra coding. This is in stark contrast to native Android or iOS development which requires a lot of redundant coding. However, for now, we have built the app only for Android but a build for iOS wouldn't be a huge undertaking in case the app needs to be actually used in classroom situations.
+    \item Flutter provides the hot reload feature which really speeds up development. Native Android coding requires us to reinstall the app to check for new changes which can become a real pain once the app increases in size.
+    \item Flutter unifies the UI design and the logic which is a huge relief from native Android development's requirement for writing XML files for each screen.
+    \item Last but not the least, Flutter provides some really good widgets that require little or no less customization before they look good.
+\end{itemize}
+\subsection{Firebase}
+Firebase was used as the backend for the app. This was a no-brainer choice since the backend requirements of the app aren't very complex and Firebase provides an easy to setup interface. It was used by us for both Authentication and Database handling. Firebase provides two types of databases. The one we used is Cloud Firestore. It is a noSQL (JSON based) database. The app includes an API key which the app uses to communicate with Firebase.
+\subsection{Bonsoir (Network Service Discovery)}
+Bonsoir is an open source Flutter library that we used for Network Service Discovery. Network Service Discovery is used for registering the attendance service over the network from the professor side and is then used from the student side to get the host and port of the professor's phone. In native Android development, this would have been an in-built feature but since Flutter is coded in dart, we have to use libraries that further get ported to both Android and iOS.
+\subsection{Socket Programming}
+Socket programming was done using the TCP protocol. On professor's side, a server is created which the student side communicates through socket programming. 
+
+\section{Architecture and the directory structure}
+The architecture is loosely based on the \textbf{Model-View-Controller(MVC)}. We say loosely because the division of labour between the models, views and controllers that is usually expected wasn't followed as strictly by us. Some of controller workload is shared by the models and some by the views.
+The views are in the screens since its a convention to call the views as screens in Flutter development. The file \emph{main.dart} is the entrypoint for the app and the flow of code starts from there itself.
+The directory structure is as follows :
+\begin{forest}
+  for tree={
+    font=\ttfamily,
+    grow'=0,
+    child anchor=west,
+    parent anchor=south,
+    anchor=west,
+    calign=first,
+    edge path={
+      \noexpand\path [draw, \forestoption{edge}]
+      (!u.south west) +(7.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+    },
+    before typesetting nodes={
+      if n=1
+        {insert before={[,phantom]}}
+        {}
+    },
+    fit=band,
+    before computing xy={l=15pt},
+  }
+[lib
+  [models
+    [all the model files]
+  ]
+  [controller
+    [all the controller files]
+  ]
+  [screens
+    [all the views or screens]
+  ]
+  [networking
+    [socket-programming.dart]
+    [network-service-discovery.dart]
+  ]
+  [main.dart (entrypoint)]
+]
+\end{forest}
+
+
+\section{Implementation of networking}
+Yeh Chirag likhega
+
+\section{The Database Schema}
+Yeh Gupta likhega
+\section{Snapshots}
+all screenshots will go here
+
+\section{References and tools}
+Firebase related links :
+\begin{enumerate}
+    \item \url{https://firebase.google.com/docs}
+    \item \url{https://www.youtube.com/watch?v=sfA3NWDBPZ4&list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC}
+    \item \url{https://www.youtube.com/playlist?list=PLl-K7zZEsYLluG5MCVEzXAQ7ACZBCuZgZ}
+\end{enumerate}
+Networking related links :
+\begin{enumerate}
+    \item \url{https://jamesslocum.com/blog/post/67566023889}
+    \item \url{https://developer.android.com/training/connect-devices-wirelessly/nsd#kotlin}
+    \item \url{https://pub.dev/packages/bonsoir}
+\end{enumerate}
+Flutter related links :
+\begin{enumerate}
+    \item \url{https://flutter.dev/}
+\end{enumerate}
+
+
+
+
+\end{document}
