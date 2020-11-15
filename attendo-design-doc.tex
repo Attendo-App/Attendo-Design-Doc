@@ -74,8 +74,9 @@ Socket programming was done using the TCP protocol. On professor's side, a serve
 
 \section{Architecture and the directory structure}
 The architecture is loosely based on the \textbf{Model-View-Controller(MVC)}. We say loosely because the division of labour between the models, views and controllers that is usually expected wasn't followed as strictly by us. Some of controller workload is shared by the models and some by the views.
-The views are in the screens since its a convention to call the views as screens in Flutter development. The file \emph{main.dart} is the entrypoint for the app and the flow of code starts from there itself.
-The directory structure is as follows :
+The views are in the screens since its a convention to call the views as screens in Flutter development. The file \emph{main.dart} is the entrypoint for the app and the flow of code starts from there itself. The directory structure is as follows :
+\newline
+\newline
 \begin{forest}
   for tree={
     font=\ttfamily,
@@ -116,10 +117,66 @@ The directory structure is as follows :
 
 
 \section{Implementation of networking}
-Yeh Chirag likhega
+The actual act of taking attendance is divided into two parts on both the professor and the student sides. The two parts are concerned with network service discovery(NSD) and socket programming respectively.
+\\
+Let's delve into the details of the professor's flow.
+Once the professor taps on take attendance, first a service is registered on the network with the host and port and the service name. Next, a server is started by the professor's phone and it starts listening for connections. Once a connection is recieved, it checks whether it is from an IP address that hasn't already marked attendance and adds the enrollment number to the attended list accordingly. Since this is happening on the local network, students can't fool the system by using a VPN. Also, by ensuring the same IP can't mark attendance twice, we make sure that the student can't mark attendance twice using the same device.
+\\
+On the student side, the phone searches for the service using nsd and gets the required host and port. It then connects to the service, sends the enrollment number and disconnects.
+\\
+The networking is done in TCP and NSD is implemented using a flutter library \emph{Bonsoir}.
 
 \section{The Database Schema}
-Yeh Gupta likhega
+Firebase includes includes alternating JSON based documents and their collections in its database. The following is the Database Schema :
+\newline
+\newline
+\hfill
+\begin{forest}
+  for tree={
+    font=\ttfamily,
+    grow'=0,
+    child anchor=west,
+    parent anchor=south,
+    anchor=west,
+    calign=first,
+    edge path={
+      \noexpand\path [draw, \forestoption{edge}]
+      (!u.south west) +(7.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+    },
+    before typesetting nodes={
+      if n=1
+        {insert before={[,phantom]}}
+        {}
+    },
+    fit=band,
+    before computing xy={l=15pt},
+  }
+  [Root Document
+      [Courses Collection
+            [Course Documents
+                [Enrollment-numbers-list]
+                [Course Code]
+                [Course Name]
+                [Professor Name]
+                [Lectures Collection
+                    [Lecture Documents
+                        [List of enrollment numbers of attended students]
+                        [Date]
+                    ]
+                ]
+            ]
+          ]
+    [Users Collection
+      [User Documents
+        [Enrollment number]
+        [Name]
+        [User Type (Teacher/Student)]
+        [User ID]
+      ]
+     ]
+    ]
+\end{forest}
+\hfill
 \section{Snapshots}
 all screenshots will go here
 
@@ -140,8 +197,5 @@ Flutter related links :
 \begin{enumerate}
     \item \url{https://flutter.dev/}
 \end{enumerate}
-
-
-
 
 \end{document}
