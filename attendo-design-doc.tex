@@ -14,12 +14,12 @@
 \graphicspath{ {images/} }
 \title{\textbf{\underline{Attendo Design Document}}}
 \author{
-\textbf{Team - 13} \\
-\\ Angad Kambli, 19114041\\ 
-Ayush Gupta \\ 
-Chirag Wadhwa \\ 
-Devanshu Chowdhury \\ 
-Shubham Bansode \\ }
+\textbf{Team - 13}\\
+Angad Kambli, 19114041\\ 
+Ayush Gupta, 191114017 \\ 
+Chirag Wadhwa, 19114023 \\ 
+Devanshu Chowdhury, 19114027 \\ 
+Shubham Bansode, 19114019 }
 \date{}
 \begin{document}
 
@@ -40,27 +40,154 @@ With \textbf{Attendo}, we bring a solution to all these qualms. With a simple an
 \section{Division of labour}
 While all the team members were involved in the brainstorming for deciding the app's flow and implementation, there was a clear division of labour with regards to the domains a certain person would be responsible for. Following are the contributions of various members :
 \begin{enumerate}
-    \item \textbf{Angad Kambli, 19114041 :} Initialization of project, implementation of socket programming and network service discovery, coding the login and registration screen UI and other UI fixes, maintaining the GitHub repository(reviewing PRs, solving merge conflicts and so on), designing the icon and other minor fixes.
-    \item \textbf{Ayush Gupta, 1911140-- : } Setting up Firebase in the app, setting up authentication logic for the user, writing database queries for read and writes, writing controller functions to clean data recieved from database.
-    \item \textbf{Chirag Wadhwa, 191140-- : } Implementing the flow of taking and marking attendance, implementing the logic to prevent multiple attendance markings from the same device, Final changes to bring all the implementation together and to remove all hard coded values.
-    \item \textbf{Devanshu Chowdhury, 191140-- : } Designing the login and registration screens, coding and designing the UI for rest of the screens.
-    \item \textbf{Shubham Bansode, 191140-- : }  Writing database queries for read and writes, writing controller functions to clean data recieved from database.
-    
+    \item \textbf{Angad Kambli, 19114041 :} Initialization of project, implementation of socket programming and network service discovery, coding the login and registration screen UI and other UI fixes, maintaining the GitHub repository(reviewing PRs, solving merge conflicts and so on), the course image solution, designing the icon and other minor fixes.
+    \item \textbf{Ayush Gupta, 191114017 : } Setting up Firebase in the app, setting up authentication logic for the user, writing database queries for read and writes, writing controller functions to clean data recieved from database and add minor functionality in registration pages.
+    \item \textbf{Chirag Wadhwa, 19114023 : } Implementing the flow of taking and marking attendance, implementing the logic to prevent multiple attendance markings from the same device, Major final changes to bring all the implementation together and to remove all hard coded values and replace them with database query calls, final bug fixes and testing.
+    \item \textbf{Devanshu Chowdhury, 19114027 : } Designing the UI for the App. Coding most of the Screens including the Dialogue Boxes showing successful and failed errors , designing hard-coded List Views and minor visual changes to the UI to make the design more attractive and comprehensible.
+    \item \textbf{Shubham Bansode, 19114019 : }  Writing database queries for read and writes, writing controller functions to clean data recieved from database, final screenshots.
 \end{enumerate}
 
 \section{Use Case Diagram}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{UseCaseDiagram.png}
+    \includegraphics[width=0.95\textwidth]{UseCase.jpeg}
     \caption{Use Case Diagram}
     \label{fig:UseCase}
 \end{figure}
 
+\textbf{Use Case 1 :} Register \\
+\textbf{Actor :} Student, Professor \\
+\textbf{Pre-conditions :} Is not already registered\\
+\textbf{Basic Flow :}
+\begin{itemize}
+    \item Scenario 1 : Mainline Sequence
+        \begin{enumerate}
+            \item Student/Professor : Enter credentials and tap on the register button.
+            \item AuthService : Pass the credentials to the database for checking validity.
+            \item  Database:  Check credentials for validity.        
+\end{enumerate}
+   \item Scenario 2: At Step 4 of Mainline Sequence 
+        \begin{enumerate}
+            \setcounter{enumi}{3}
+            \item Database: return the user id if credentials are valid.
+	\item AuthService: display successful dialog box. 
+        \end{enumerate}  
+    \item Scenario 3: At Step 4 of Mainline Sequence 
+        \begin{enumerate}
+            \setcounter{enumi}{3}
+            \item Database: return null if credentials not valid
+	\item AuthService: print error message. 
+        \end{enumerate}  
+\end{itemize}
+\textbf{Post-Conditions:} Is registered\\ \\
+\textbf{Use Case 2:} Login\\
+\textbf{Actor :} Student, Professor \\
+\textbf{Pre-conditions :}Is a registered user\\
+\textbf{Basic Flow :} 
+\begin{itemize}
+    \item Scenario 1: Mainline Sequence
+\begin{enumerate}
+\item Student/Professor : This use case starts when a user wishes to log in into the System. 
+\item System : requests that the user enter his/her Login Information i.e Email ID and Password. 
+\item Student/Professor : Insert his/her Email and Password. 	
+\item Controller: The System then validates the entered Email ID and password.
+\item Controller : Confirm Log in
+\end{enumerate}
+	\item Scenario 2: At Step 4
+	    \begin{enumerate}
+	        \setcounter{enumi}{3}
+		    \item System : Show error
+	    \end{enumerate}
+		
+\end{itemize}
+\textbf{Post-Conditions:} Is logged in\\ \\
+\textbf{Use Case 3 :} Mark Attendance \\
+\textbf{Actor :} Student,Local Network\\
+\textbf{Pre-conditions :}  Is logged in as a student and is also registered in course\\
+\textbf{Basic Flow :}
+\begin{itemize}
+    \item Scenario 1 : Mainline Sequence
+        \begin{enumerate}
+            \item Student : Click Mark Attendance Button
+	\item Local Network: Discover service,get ip and port of server
+	\item Local Network: Connect to server using ip and port
+	\item Local Network: Communicate enrollment number to server
+        \end{enumerate}
+   \item Scenario 2 : At Step 5 of Mainline Sequence
+        \begin{enumerate}
+	\setcounter{enumi}{4}
+            \item Local Network: Send “OK” message from server to Student
+	\item System: Displays attendance success dialogue
+        \end{enumerate}
+ \item Scenario 3: At Step 5 of Mainline Sequence
+       \begin{enumerate}
+	\setcounter{enumi}{4}
+	\item Local Network: Send “Error” message from server to Student
+	\item System: Displays attendance failure dialogue
+     \end{enumerate}
+\end{itemize}
+\textbf{Post-Conditions:} If the IP address is unique,attendance is marked for the selected course.\\ \\
+\textbf{Use Case 5 : }View Course\\
+\textbf{Actor : }Student, Professor\\
+\textbf{Preconditions : }Is logged in\\
+\textbf{Basic Flow: } 
+\begin{itemize}
+    \item Scenario 1 : Mainline Sequence
+        \begin{enumerate}
+            \item Student/Professor : Select Course
+            \item System: Request Course Details
+            \item  Database:  Return Course Details
+\item System : Format and Display details accordingly.        
+\end{enumerate}
+\end{itemize}
+\textbf{Post-Conditions: }User can view course details for the selected course\\
+
+
+
 \section{Class Diagram}
-Class diagram will go here. kal banayenge
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ClassDiagram.jpeg}
+    \caption{Class Diagram}
+    \label{fig:ClassDiagram}
+\end{figure}
 
 \section{Sequence Diagram} 
-Sequence diagram will go here. kal banayenge
+\subsection{Mark Attendance Use Case}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{MarkAttendance.jpeg}
+    \caption{}
+    \label{fig:MarkAttendace}
+\end{figure}
+\subsection{Take Attendance Use Case}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{TakeAttendace.jpeg}
+    \caption{}
+    \label{fig:TakeAttendace}
+\end{figure}
+\subsection{Login Use Case}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{login sequence diagram.jpeg}
+    \caption{}
+    \label{fig:Login}
+\end{figure}
+\subsection{Register Use Case}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{register sequence diagram.jpeg}
+    \caption{}
+    \label{fig:register}
+\end{figure}
+\subsection{View Course Use Case}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{ViewCourse.jpeg}
+    \caption{}
+    \label{fig:ViewCourse}
+\end{figure}
 
 \section{Tech stack}
 The different frameworks, technologies and libraries used for the implementation will be discussed in the following subsections.
