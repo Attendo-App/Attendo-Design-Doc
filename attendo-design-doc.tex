@@ -24,11 +24,18 @@ Shubham Bansode \\ }
 \begin{document}
 
 \maketitle
+
+\begin{abstract}
+    \textbf{Attendo} is developed by us as an app to streamline marking attendance in classroom settings. It is developed using the \textbf{Flutter} framework and it makes use of \textbf{Network Service Discovery} and \textbf{Socket Programming} for the networking part and \textbf{Firebase} for backend. It aims at making the attendance process quick and easy for both the teachers and the students. The following document will give a thorough description of the methods used in the implementation of the app, the tech stack and the thinking behind selecting it, some design decisions and clever approaches applied by us and the UML diagrams. The code is hosted on GitHub and can be accessed \href{https://github.com/Attendo-App/Attendo}{here}.
+\end{abstract}
 \tableofcontents
 \newpage
 
 \section{Introduction}
-\textbf{Attendo} is developed by us as an app to streamline marking attendance in classroom settings. It is developed using the \textbf{Flutter} framework and it makes use of \textbf{Network Service Discovery} and \textbf{Socket Programming} for the networking part and \textbf{Firebase} for backend. It aims at making the attendance process quick and easy for both the teachers and the students. The following document will give a thorough description of the methods used in the implementation of the app, the tech stack and the thinking behind selecting it and the UML diagrams. The code is hosted on GitHub and can be accessed \href{https://github.com/Attendo-App/Attendo}{here}.
+\subsection{Problem Statement}
+Classical methods used in classrooms to take attendance are cumbersome and time taking. Also, calling out names also gives a rise to the issue of not being able to maintain the sanctity of records due to students marking proxies. Also, it is disadvantageous for both professors and students with respect to availability of data. For the professor, it is a pain to physically comb through the records to check whether a certain student fulfills the minimum criteria. For the student, he has to keep a record of how many classes he has attended and if he doesn't, there are chances he would never understand his attendance is dangerously low before it's too late. With the availability of mobile devices, it is high time that we start making use of it for taking attendance.
+\subsection{The Solution}
+With \textbf{Attendo}, we bring a solution to all these qualms. With a simple and well-designed UI, it can be easily introduced in classroom settings. It makes sure every device can mark attendance only once thus guaranteeing the sanctity of records. The professor can easily check the attendance percentage of his students and can also check every lecture's record which might prove useful in detecting patterns in attendance statistics. With the records easily accessible at any time, a student can correct his habits well in time if his attendance percentage is low.
 
 \section{Division of labour}
 While all the team members were involved in the brainstorming for deciding the app's flow and implementation, there was a clear division of labour with regards to the domains a certain person would be responsible for. Following are the contributions of various members :
@@ -195,18 +202,64 @@ We had hard-coded the course display image for most of our development period. H
     \caption{The Course Display icons}
     \label{fig:UseCase}
 \end{figure}
-\\Keeping this in mind, we created ten abstract, simple and snappy icons for different courses. While making it seemingly random to the user,the image is still chosen deterministically to ensure that it remains constant for any particular course. we decided to take the modulo of the addition of the last two digits of the course code as the index that would select one icon out of the ten we made. 
+\\Keeping this in mind, we created ten abstract, simple and snappy icons for different courses. While making it seemingly random to the user,the image is still chosen deterministically to ensure that it remains constant for any particular course. We decided to take the modulo of the number formed by the last two digits of the course code as the index that would select one icon out of the ten we made. 
 \\This would make the home page much more vivid and also improve the User Experience since we tend to associate images and text and having that remembrance value always helps.
 
 \section{Snapshots}
-all screenshots will go here
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.50\textwidth]{HomeScreen[1].jpg}
+    \caption{Auth Landing Screen}
+    \label{fig:HomeScreen}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.40\textwidth]{Studentregisteration.jpg}
+    \includegraphics[width=0.40\textwidth]{ProfRegistration.jpg}
+    \caption{Student and Professor registration}
+    \label{fig:StudentProfReg}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.40\textwidth]{StudentLogin.jpg}
+    \includegraphics[width=0.40\textwidth]{ProfLogin.jpg}
+    \caption{Student and Professor Login}
+    \label{fig:StPrLogin}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.40\textwidth]{StudentsCourses.jpg}
+    \includegraphics[width=0.40\textwidth]{ProfCourses.jpg}
+    \caption{Student and Professor Home Page}
+    \label{fig:StPrCourses}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.40\textwidth]{AttGreenbar.jpg}
+    \includegraphics[width=0.40\textwidth]{AttRedbar.jpg}
+    \caption{Attendance bar}
+    \label{fig:Attbar}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.40\textwidth]{Students.jpg}
+    \includegraphics[width=0.40\textwidth]{Lectures.jpg}
+    \caption{Lecture details and Student Stats}
+    \label{fig:LecSt}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.50\textwidth]{AddAttendee.jpg}
+    \caption{Add Student attendance manually}
+    \label{fig:AddStudent}
+\end{figure}
 \section{References and tools}
 Firebase related links :
 \begin{enumerate}
     \item \url{https://firebase.google.com/docs}
     \item \url{https://www.youtube.com/watch?v=sfA3NWDBPZ4&list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC}
     \item \url{https://www.youtube.com/playlist?list=PLl-K7zZEsYLluG5MCVEzXAQ7ACZBCuZgZ}
+    \item \url{https://medium.com/flutterdevs/using-firebase-firestore-in-flutter-b0ea2c62bc7}
 \end{enumerate}
 Networking related links :
 \begin{enumerate}
@@ -217,6 +270,7 @@ Networking related links :
 Flutter related links :
 \begin{enumerate}
     \item \url{https://flutter.dev/}
+    \item \url{https://api.flutter.dev/flutter/dart-core/dart-core-library.html}
 \end{enumerate}
-
+    
 \end{document}
