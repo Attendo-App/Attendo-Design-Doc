@@ -127,6 +127,40 @@ While all the team members were involved in the brainstorming for deciding the a
      \end{enumerate}
 \end{itemize}
 \textbf{Post-Conditions:} If the IP address is unique,attendance is marked for the selected course.\\ \\
+\textbf{Use Case 4 : }Take Attendance\\
+\textbf{Actor : }Professor,Local Network\\
+\textbf{Preconditions : }Is logged in as a professor and the instructor for the course\\
+\textbf{Basic Flow: }
+\begin{itemize}
+\item Scenario 1: Mainline Sequence
+	\begin{enumerate}
+		\item Professor: Click on take attendance button
+\item Local Network: Register network service
+\item Local Network: Start server
+\item Local Network: Await enrollment number from students
+\item System: Check for duplicate ip address 
+	\end{enumerate}
+\item Scenario 2: Step 6 of Mainline Sequence
+	\begin{enumerate}
+		\setcounter{enumi}{5}
+		\item System: If unique ip address, add student enrollment number
+		\item Local Network: Send “ok” message to student
+	\end{enumerate}
+	\item Scenario 3: Step 6 of Mainline Sequence
+	\begin{enumerate}
+		\setcounter{enumi}{5}
+		\item System: If duplicate ip address, don’t student enrollment number
+		\item Local Network: Send “Error” message to student
+	\end{enumerate}
+	\item Scenario 4: Step 8 of Mainline Sequence
+		\begin{enumerate}
+			\setcounter{enumi}{7}
+			\item Local Network: Close server
+			\item Local Network: Deregister network service
+			\item System: Upload attendance list to database
+		\end{enumerate}
+\end{itemize}
+\textbf{Post-Conditions: }Attendance is taken and the records are uploaded to database\\ \\
 \textbf{Use Case 5 : }View Course\\
 \textbf{Actor : }Student, Professor\\
 \textbf{Preconditions : }Is logged in\\
