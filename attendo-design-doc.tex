@@ -120,7 +120,7 @@ The views are in the screens since its a convention to call the views as screens
 The actual act of taking attendance is divided into two parts on both the professor and the student sides. The two parts are concerned with network service discovery(NSD) and socket programming respectively.
 \\
 Let's delve into the details of the professor's flow.
-Once the professor taps on take attendance, first a service is registered on the network with the host and port and the service name. Next, a server is started by the professor's phone and it starts listening for connections. Once a connection is recieved, it checks whether it is from an IP address that hasn't already marked attendance and adds the enrollment number to the attended list accordingly. Since this is happening on the local network, students can't fool the system by using a VPN. Also, by ensuring the same IP can't mark attendance twice, we make sure that the student can't mark attendance twice using the same device.
+Once the professor taps on take attendance, first a service is registered on the network with the host and port and the service name using NSD. Next, a TCP server is started by the professor's phone and it starts listening for connections. Once a connection is recieved, it checks whether it is from an IP address that hasn't already marked attendance and adds the enrollment number to the attended list accordingly. Since this is happening on the local network, students can't fool the system by using a VPN. Also, by ensuring the same IP can't mark attendance twice, we make sure that the student can't mark attendance twice using the same device.
 \\
 On the student side, the phone searches for the service using nsd and gets the required host and port. It then connects to the service, sends the enrollment number and disconnects.
 \\
@@ -177,6 +177,27 @@ Firebase includes includes alternating JSON based documents and their collection
     ]
 \end{forest}
 \hfill
+
+\section{Course Display Image Solution}
+We had hard-coded the course display image for most of our development period. However, it is important to have a recognizable and good looking image associated with every course to improve the user experience. Now, to give the option for users to customize the display pictures for every course would be a major undertaking since it would involve storing each and every image which wouldn't be desirable since such storage requirements would hurt the scalability of the project.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.09\textwidth]{course-img1.png}
+    \includegraphics[width=0.09\textwidth]{course-img2.png}
+    \includegraphics[width=0.09\textwidth]{course-img3.png}
+    \includegraphics[width=0.09\textwidth]{course-img4.png}
+    \includegraphics[width=0.09\textwidth]{course-img5.png}
+    \includegraphics[width=0.09\textwidth]{course-img6.png}
+    \includegraphics[width=0.09\textwidth]{course-img7.png}
+    \includegraphics[width=0.09\textwidth]{course-img8.png}
+    \includegraphics[width=0.09\textwidth]{course-img9.png}
+    \includegraphics[width=0.09\textwidth]{course-img10.png}
+    \caption{The Course Display icons}
+    \label{fig:UseCase}
+\end{figure}
+\\Keeping this in mind, we created ten abstract, simple and snappy icons for different courses. While making it seemingly random to the user,the image is still chosen deterministically to ensure that it remains constant for any particular course. we decided to take the modulo of the addition of the last two digits of the course code as the index that would select one icon out of the ten we made. 
+\\This would make the home page much more vivid and also improve the User Experience since we tend to associate images and text and having that remembrance value always helps.
+
 \section{Snapshots}
 all screenshots will go here
 
