@@ -18,7 +18,7 @@
 Angad Kambli, 19114041\\ 
 Ayush Gupta, 191114017 \\ 
 Chirag Wadhwa, 19114023 \\ 
-Devanshu Chowdhury, 19114027 \\ 
+Devanshu Chaudhari, 19114027 \\ 
 Shubham Bansode, 19114019 }
 \date{}
 \begin{document}
@@ -43,7 +43,7 @@ While all the team members were involved in the brainstorming for deciding the a
     \item \textbf{Angad Kambli, 19114041 :} Initialization of project, implementation of socket programming and network service discovery, coding the login and registration screen UI and other UI fixes, maintaining the GitHub repository(reviewing PRs, solving merge conflicts and so on), the course image solution, designing the icon and other minor fixes.
     \item \textbf{Ayush Gupta, 191114017 : } Setting up Firebase in the app, setting up authentication logic for the user, writing database queries for read and writes, writing controller functions to clean data recieved from database and add minor functionality in registration pages.
     \item \textbf{Chirag Wadhwa, 19114023 : } Implementing the flow of taking and marking attendance, implementing the logic to prevent multiple attendance markings from the same device, Major final changes to bring all the implementation together and to remove all hard coded values and replace them with database query calls, final bug fixes and testing.
-    \item \textbf{Devanshu Chowdhury, 19114027 : } Designing the UI for the App. Coding most of the Screens including the Dialogue Boxes showing successful and failed errors , designing hard-coded List Views and minor visual changes to the UI to make the design more attractive and comprehensible.
+    \item \textbf{Devanshu Chaudhari, 19114027 : } Designing the UI for the App. Coding most of the Screens including the Dialogue Boxes showing successful and failed errors , designing hard-coded List Views and minor visual changes to the UI to make the design more attractive and comprehensible.
     \item \textbf{Shubham Bansode, 19114019 : }  Writing database queries for read and writes, writing controller functions to clean data recieved from database, final screenshots.
 \end{enumerate}
 
@@ -88,15 +88,15 @@ While all the team members were involved in the brainstorming for deciding the a
     \item Scenario 1: Mainline Sequence
 \begin{enumerate}
 \item Student/Professor : This use case starts when a user wishes to log in into the System. 
-\item System : requests that the user enter his/her Login Information i.e Email ID and Password. 
-\item Student/Professor : Insert his/her Email and Password. 	
-\item Controller: The System then validates the entered Email ID and password.
+\item System : Request user to enter Login Information i.e Email ID and Password. 
+\item Student/Professor : Insert Email and Password. 	
+\item Controller: Validate the entered Email ID and password.
 \item Controller : Confirm Log in
 \end{enumerate}
-	\item Scenario 2: At Step 4
+	\item Scenario 2: At Step 5
 	    \begin{enumerate}
-	        \setcounter{enumi}{3}
-		    \item System : Show error
+	        \setcounter{enumi}{4}
+		    \item Controller : Show error
 	    \end{enumerate}
 		
 \end{itemize}
@@ -117,13 +117,13 @@ While all the team members were involved in the brainstorming for deciding the a
         \begin{enumerate}
 	\setcounter{enumi}{4}
             \item Local Network: Send “OK” message from server to Student
-	\item System: Displays attendance success dialogue
+	        \item Controller: Displays attendance success dialogue
         \end{enumerate}
  \item Scenario 3: At Step 5 of Mainline Sequence
        \begin{enumerate}
 	\setcounter{enumi}{4}
 	\item Local Network: Send “Error” message from server to Student
-	\item System: Displays attendance failure dialogue
+	\item Controller: Displays attendance failure dialogue
      \end{enumerate}
 \end{itemize}
 \textbf{Post-Conditions:} If the IP address is unique,attendance is marked for the selected course.\\ \\
@@ -149,12 +149,16 @@ While all the team members were involved in the brainstorming for deciding the a
 	\item Scenario 3: Step 6 of Mainline Sequence
 	\begin{enumerate}
 		\setcounter{enumi}{5}
-		\item System: If duplicate ip address, don’t student enrollment number
+		\item System: If duplicate ip address, don’t add student enrollment number
 		\item Local Network: Send “Error” message to student
 	\end{enumerate}
 	\item Scenario 4: Step 8 of Mainline Sequence
 		\begin{enumerate}
 			\setcounter{enumi}{7}
+			\item Professor: Click on Manually add attendance button
+			\item System: Ask for enrollment number of student
+			\item Professor: Enter enrollment number
+			\item System: After maximum time(3 minutes),ask local network to close server and deregister service
 			\item Local Network: Close server
 			\item Local Network: Deregister network service
 			\item System: Upload attendance list to database
@@ -231,7 +235,7 @@ Flutter is a framework developed by Google mainly for increasing the productivit
     \item Flutter can build for both iOS and Android with very less extra coding. This is in stark contrast to native Android or iOS development which requires a lot of redundant coding. However, for now, we have built the app only for Android but a build for iOS wouldn't be a huge undertaking in case the app needs to be actually used in classroom situations.
     \item Flutter provides the hot reload feature which really speeds up development. Native Android coding requires us to reinstall the app to check for new changes which can become a real pain once the app increases in size.
     \item Flutter unifies the UI design and the logic which is a huge relief from native Android development's requirement for writing XML files for each screen.
-    \item Last but not the least, Flutter provides some really good widgets that require little or no less customization before they look good.
+    \item Last but not the least, Flutter provides some really good widgets that require little or no customization before they look good.
 \end{itemize}
 \subsection{Firebase}
 Firebase was used as the backend for the app. This was a no-brainer choice since the backend requirements of the app aren't very complex and Firebase provides an easy to setup interface. It was used by us for both Authentication and Database handling. Firebase provides two types of databases. The one we used is Cloud Firestore. It is a noSQL (JSON based) database. The app includes an API key which the app uses to communicate with Firebase.
